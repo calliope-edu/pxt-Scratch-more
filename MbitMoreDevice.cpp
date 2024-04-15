@@ -107,14 +107,14 @@ MbitMoreDevice::MbitMoreDevice(MicroBit &_uBit) : uBit(_uBit) {
   // to detect 8G gesture event
   uBit.accelerometer.setRange(8);
 
-  displayVersion();
+  // displayVersion();
 
   uBit.messageBus.listen(
       MICROBIT_ID_BUTTON_A, MICROBIT_EVT_ANY,
       this,
       &MbitMoreDevice::onButtonChanged,
       MESSAGE_BUS_LISTENER_QUEUE_IF_BUSY);
-  uBit.messageBus.listen(
+  uBit.messageBus.listen( 
       MICROBIT_ID_BUTTON_B,
       MICROBIT_EVT_ANY,
       this,
@@ -203,7 +203,8 @@ void MbitMoreDevice::onBLEConnected(MicroBitEvent _e) {
 #endif // MICROBIT_CODAL
   initializeConfig();
   uBit.display.stopAnimation(); // To stop display friendly name.
-  uBit.display.print("M");
+  MicroBitImage smiley("0,255,0,255, 0\n0,255,0,255,0\n0,0,0,0,0\n255,0,0,0,255\n0,255,255,255,0\n");
+  uBit.display.print(smiley);
 }
 
 /**
@@ -219,7 +220,8 @@ void MbitMoreDevice::onSerialConnected() {
   uBit.ble->stopAdvertising();
   initializeConfig();
   uBit.display.stopAnimation(); // To stop display friendly name.
-  uBit.display.print("M");
+  MicroBitImage smiley("0,255,0,255, 0\n0,255,0,255,0\n0,0,0,0,0\n255,0,0,0,255\n0,255,255,255,0\n");
+  uBit.display.print(smiley);
   serialConnected = true;
 }
 
@@ -944,9 +946,9 @@ void MbitMoreDevice::displayFriendlyName() {
  * @brief Display software version of Microbit More.
  * 
  */
-void MbitMoreDevice::displayVersion() {
-  uBit.display.scrollAsync(ManagedString(" -M 0.2.5- "), 120);
-}
+// void MbitMoreDevice::displayVersion() {
+//   uBit.display.scrollAsync(ManagedString(" -M 0.2.5- "), 120);
+// }
 
 /**
  * @brief Whether the pin is a GPIO of not.

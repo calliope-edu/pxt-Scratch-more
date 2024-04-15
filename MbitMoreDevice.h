@@ -400,7 +400,7 @@ public:
    * @brief Display software version of Microbit More.
    * 
    */
-  void displayVersion();
+  // void displayVersion();
 
 private:
   /**
