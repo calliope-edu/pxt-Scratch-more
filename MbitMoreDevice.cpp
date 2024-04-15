@@ -91,18 +91,18 @@ void copyManagedString(char *dst, ManagedString mstr, size_t maxLength) {
  */
 MbitMoreDevice::MbitMoreDevice(MicroBit &_uBit) : uBit(_uBit) {
   // Reset compass
-#if MICROBIT_CODAL
-  // On microbit-v2, re-calibration destruct compass heading.
-#else // NOT MICROBIT_CODAL
-  if (uBit.buttonA.isPressed()) {
-    uBit.compass.clearCalibration();
-  }
-#endif // NOT MICROBIT_CODAL
+// #if MICROBIT_CODAL
+//   // On microbit-v2, re-calibration destruct compass heading.
+// #else // NOT MICROBIT_CODAL
+//   if (uBit.buttonA.isPressed()) {
+//     uBit.compass.clearCalibration();
+//   }
+// #endif // NOT MICROBIT_CODAL
 
   // Compass must be calibrated before starting bluetooth service.
-  if (!uBit.compass.isCalibrated()) {
-    uBit.compass.calibrate();
-  }
+  // if (!uBit.compass.isCalibrated()) {
+  //   uBit.compass.calibrate();
+  // }
 
   // to detect 8G gesture event
   uBit.accelerometer.setRange(8);
