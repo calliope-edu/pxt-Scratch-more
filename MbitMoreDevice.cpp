@@ -203,8 +203,8 @@ void MbitMoreDevice::onBLEConnected(MicroBitEvent _e) {
 #endif // MICROBIT_CODAL
   initializeConfig();
   uBit.display.stopAnimation(); // To stop display friendly name.
-  MicroBitImage smiley("0,255,0,255, 0\n0,255,0,255,0\n0,0,0,0,0\n255,0,0,0,255\n0,255,255,255,0\n");
-  uBit.display.print(smiley);
+  // uBit.display.print("M");
+  uBit.display.print("0,255,0,255, 0\n0,255,0,255,0\n0,0,0,0,0\n255,0,0,0,255\n0,255,255,255,0\n");
 }
 
 /**
@@ -220,8 +220,8 @@ void MbitMoreDevice::onSerialConnected() {
   uBit.ble->stopAdvertising();
   initializeConfig();
   uBit.display.stopAnimation(); // To stop display friendly name.
-  MicroBitImage smiley("0,255,0,255, 0\n0,255,0,255,0\n0,0,0,0,0\n255,0,0,0,255\n0,255,255,255,0\n");
-  uBit.display.print(smiley);
+  // uBit.display.print("M");
+  uBit.display.print("0,255,0,255, 0\n0,255,0,255,0\n0,0,0,0,0\n255,0,0,0,255\n0,255,255,255,0\n");
   serialConnected = true;
 }
 
@@ -946,9 +946,9 @@ void MbitMoreDevice::displayFriendlyName() {
  * @brief Display software version of Microbit More.
  * 
  */
-// void MbitMoreDevice::displayVersion() {
-//   uBit.display.scrollAsync(ManagedString(" -M 0.2.5- "), 120);
-// }
+void MbitMoreDevice::displayVersion() {
+  uBit.display.scrollAsync(ManagedString(" -M 0.2.5- "), 120);
+}
 
 /**
  * @brief Whether the pin is a GPIO of not.
