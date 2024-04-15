@@ -203,8 +203,7 @@ void MbitMoreDevice::onBLEConnected(MicroBitEvent _e) {
 #endif // MICROBIT_CODAL
   initializeConfig();
   uBit.display.stopAnimation(); // To stop display friendly name.
-  // uBit.display.print("M");
-  uBit.display.print("0,255,0,255, 0\n0,255,0,255,0\n0,0,0,0,0\n255,0,0,0,255\n0,255,255,255,0\n");
+  uBit.display.print("C");
 }
 
 /**
@@ -220,8 +219,7 @@ void MbitMoreDevice::onSerialConnected() {
   uBit.ble->stopAdvertising();
   initializeConfig();
   uBit.display.stopAnimation(); // To stop display friendly name.
-  // uBit.display.print("M");
-  uBit.display.print("0,255,0,255, 0\n0,255,0,255,0\n0,0,0,0,0\n255,0,0,0,255\n0,255,255,255,0\n");
+  uBit.display.print("C");
   serialConnected = true;
 }
 
