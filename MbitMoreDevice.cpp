@@ -107,14 +107,14 @@ MbitMoreDevice::MbitMoreDevice(MicroBit &_uBit) : uBit(_uBit) {
   // to detect 8G gesture event
   uBit.accelerometer.setRange(8);
 
-  displayVersion();
+  // displayVersion();
 
   uBit.messageBus.listen(
       MICROBIT_ID_BUTTON_A, MICROBIT_EVT_ANY,
       this,
       &MbitMoreDevice::onButtonChanged,
       MESSAGE_BUS_LISTENER_QUEUE_IF_BUSY);
-  uBit.messageBus.listen(
+  uBit.messageBus.listen( 
       MICROBIT_ID_BUTTON_B,
       MICROBIT_EVT_ANY,
       this,
@@ -203,7 +203,7 @@ void MbitMoreDevice::onBLEConnected(MicroBitEvent _e) {
 #endif // MICROBIT_CODAL
   initializeConfig();
   uBit.display.stopAnimation(); // To stop display friendly name.
-  uBit.display.print("M");
+  uBit.display.print("C");
 }
 
 /**
@@ -219,7 +219,7 @@ void MbitMoreDevice::onSerialConnected() {
   uBit.ble->stopAdvertising();
   initializeConfig();
   uBit.display.stopAnimation(); // To stop display friendly name.
-  uBit.display.print("M");
+  uBit.display.print("C");
   serialConnected = true;
 }
 
