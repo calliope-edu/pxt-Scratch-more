@@ -79,6 +79,9 @@ public:
   // Buffer of characteristic for sending analog input values of P2.
   uint8_t analogInP2ChBuffer[MM_CH_BUFFER_SIZE_ANALOG_IN] = {0};
 
+  // Buffer of characteristic for sending analog input values of P3.
+  uint8_t analogInP3ChBuffer[MM_CH_BUFFER_SIZE_ANALOG_IN] = {0};
+
 private:
   /**
    * @brief micro:bit runtime object.
@@ -100,6 +103,7 @@ private:
   GattCharacteristic *analogInP0Ch;
   GattCharacteristic *analogInP1Ch;
   GattCharacteristic *analogInP2Ch;
+  GattCharacteristic *analogInP3Ch;
 };
 
 #endif // MBIT_MORE_SERVICE_DAL_H

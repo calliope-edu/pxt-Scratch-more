@@ -29,6 +29,7 @@ const uint16_t MbitMoreService::charUUID[mbitmore_cIdx_COUNT] = {
     0x0120, // ANALOG_IN_P0
     0x0121, // ANALOG_IN_P1
     0x0122, // ANALOG_IN_P2
+    0x0123, // ANALOG_IN_P3
     0x0130  // MESSAGE
 };
 
@@ -111,6 +112,14 @@ MbitMoreService::MbitMoreService() : uBit(pxt::uBit) {
       microbit_propREAD | microbit_propREADAUTH);
 
   CreateCharacteristic(
+      mbitmore_cIdx_ANALOG_IN_P3,
+      charUUID[mbitmore_cIdx_ANALOG_IN_P3],
+      (uint8_t *)(analogInP3ChBuffer),
+      MM_CH_BUFFER_SIZE_ANALOG_IN,
+      MM_CH_BUFFER_SIZE_ANALOG_IN,
+      microbit_propREAD | microbit_propREADAUTH);
+
+  CreateCharacteristic(
       mbitmore_cIdx_DATA,
       charUUID[mbitmore_cIdx_DATA],
       (uint8_t *)(dataChBuffer),
@@ -181,6 +190,10 @@ void MbitMoreService::onDataRead(microbit_onDataRead_t *params) {
   } else if (params->handle == valueHandle(mbitmore_cIdx_ANALOG_IN_P2)) {
     mbitMore->updateAnalogIn(analogInP2ChBuffer, 2);
     params->data = analogInP2ChBuffer;
+    params->length = 2;
+  } else if (params->handle == valueHandle(mbitmore_cIdx_ANALOG_IN_P3)) {
+    mbitMore->updateAnalogIn(analogInP3ChBuffer, 2);
+    params->data = analogInP3ChBuffer;
     params->length = 2;
   }
 }

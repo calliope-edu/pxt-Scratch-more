@@ -50,6 +50,7 @@ enum MbitMoreButtonStateIndex
   A = 27,
   B = 28,
   LOGO = 29,
+  P3 = 30
 };
 
 /**

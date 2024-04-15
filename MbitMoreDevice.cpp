@@ -171,7 +171,7 @@ MbitMoreDevice::~MbitMoreDevice() {
  *
  */
 void MbitMoreDevice::initializeConfig() {
-  // P0,P1,P2 are pull-up as standard extension.
+  // P0,P1,P2,P3 are pull-up as standard extension.
   for (size_t i = 0; i < (sizeof(initialPullUp) / sizeof(initialPullUp[0])); i++) {
     setPullMode(initialPullUp[i], MbitMorePullMode::Up);
     uBit.io.pin[initialPullUp[i]].getDigitalValue(); // set the pin to input-mode
@@ -409,6 +409,9 @@ void MbitMoreDevice::updateState(uint8_t *data) {
   }
   if (touchMode[2]) {
     digitalLevels = digitalLevels | (uBit.io.pin[2].isTouched() << MbitMoreButtonStateIndex::P2);
+  }
+   if (touchMode[3]) {
+    digitalLevels = digitalLevels | (uBit.io.pin[2].isTouched() << MbitMoreButtonStateIndex::P3);
   }
   digitalLevels = digitalLevels | (uBit.buttonA.isPressed() << MbitMoreButtonStateIndex::A);
   digitalLevels = digitalLevels | (uBit.buttonB.isPressed() << MbitMoreButtonStateIndex::B);

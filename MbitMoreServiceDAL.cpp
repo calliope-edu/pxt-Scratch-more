@@ -29,6 +29,7 @@ const uint8_t MBIT_MORE_CH_ACTION_EVENT[] = {0x0b, 0x50, 0x01, 0x11, 0x60, 0x7f,
 const uint8_t MBIT_MORE_CH_ANALOG_IN_P0[] = {0x0b, 0x50, 0x01, 0x20, 0x60, 0x7f, 0x41, 0x51, 0x90, 0x91, 0x7d, 0x00, 0x8d, 0x6f, 0xfc, 0x5c};
 const uint8_t MBIT_MORE_CH_ANALOG_IN_P1[] = {0x0b, 0x50, 0x01, 0x21, 0x60, 0x7f, 0x41, 0x51, 0x90, 0x91, 0x7d, 0x00, 0x8d, 0x6f, 0xfc, 0x5c};
 const uint8_t MBIT_MORE_CH_ANALOG_IN_P2[] = {0x0b, 0x50, 0x01, 0x22, 0x60, 0x7f, 0x41, 0x51, 0x90, 0x91, 0x7d, 0x00, 0x8d, 0x6f, 0xfc, 0x5c};
+const uint8_t MBIT_MORE_CH_ANALOG_IN_P3[] = {0x0b, 0x50, 0x01, 0x23, 0x60, 0x7f, 0x41, 0x51, 0x90, 0x91, 0x7d, 0x00, 0x8d, 0x6f, 0xfc, 0x5c};
 
 /**
  * Class definition for the Scratch MicroBit More Service.
@@ -99,12 +100,20 @@ MbitMoreServiceDAL::MbitMoreServiceDAL() : uBit(pxt::uBit) {
       this, &MbitMoreServiceDAL::onReadAnalogIn);
   analogInP2Ch->requireSecurity(SecurityManager::MICROBIT_BLE_SECURITY_LEVEL);
 
+  analogInP3Ch = new GattCharacteristic(
+      MBIT_MORE_CH_ANALOG_IN_P3, (uint8_t *)&analogInP3ChBuffer,
+      MM_CH_BUFFER_SIZE_ANALOG_IN, MM_CH_BUFFER_SIZE_ANALOG_IN,
+      GattCharacteristic::BLE_GATT_CHAR_PROPERTIES_READ);
+  analogInP3Ch->setReadAuthorizationCallback(
+      this, &MbitMoreServiceDAL::onReadAnalogIn);
+  analogInP3Ch->requireSecurity(SecurityManager::MICROBIT_BLE_SECURITY_LEVEL);
+
   /*
   stateCh = digitalIn[4], lightLevel[1], temperature[1], microphone[1]
   directionCh = acceleration[10], magnet[8]
   pinEventCh = pinEvent
   actionEventCh = buttonEvent, gestureEvent
-  analogInP0Ch, analogInP1Ch, analogInP2Ch
+  analogInP0Ch, analogInP1Ch, analogInP2Ch,, analogInP3Ch
   */
 
   GattCharacteristic *mbitMoreChs[] = {
@@ -116,6 +125,7 @@ MbitMoreServiceDAL::MbitMoreServiceDAL() : uBit(pxt::uBit) {
       analogInP0Ch,
       analogInP1Ch,
       analogInP2Ch,
+      analogInP3Ch,
   };
 
   uBit.messageBus.listen(
@@ -163,6 +173,12 @@ void MbitMoreServiceDAL::onReadAnalogIn(
   } else if (authParams->handle == analogInP2Ch->getValueHandle()) {
     mbitMore->updateAnalogIn(analogInP2ChBuffer, 2);
     authParams->data = (uint8_t *)&analogInP2ChBuffer;
+    authParams->offset = 0;
+    authParams->len = MM_CH_BUFFER_SIZE_ANALOG_IN;
+    authParams->authorizationReply = AUTH_CALLBACK_REPLY_SUCCESS;
+  } else if (authParams->handle == analogInP3Ch->getValueHandle()) {
+    mbitMore->updateAnalogIn(analogInP3ChBuffer, 2);
+    authParams->data = (uint8_t *)&analogInP3ChBuffer;
     authParams->offset = 0;
     authParams->len = MM_CH_BUFFER_SIZE_ANALOG_IN;
     authParams->authorizationReply = AUTH_CALLBACK_REPLY_SUCCESS;
