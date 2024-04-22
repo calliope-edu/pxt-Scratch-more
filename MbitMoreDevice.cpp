@@ -410,8 +410,8 @@ void MbitMoreDevice::updateState(uint8_t *data) {
   if (touchMode[2]) {
     digitalLevels = digitalLevels | (uBit.io.pin[2].isTouched() << MbitMoreButtonStateIndex::P2);
   }
-   if (touchMode[3]) {
-    digitalLevels = digitalLevels | (uBit.io.pin[2].isTouched() << MbitMoreButtonStateIndex::P3);
+  if (touchMode[3]) {
+    digitalLevels = digitalLevels | (uBit.io.pin[3].isTouched() << MbitMoreButtonStateIndex::P3);
   }
   digitalLevels = digitalLevels | (uBit.buttonA.isPressed() << MbitMoreButtonStateIndex::A);
   digitalLevels = digitalLevels | (uBit.buttonB.isPressed() << MbitMoreButtonStateIndex::B);

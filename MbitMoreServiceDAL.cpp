@@ -177,7 +177,7 @@ void MbitMoreServiceDAL::onReadAnalogIn(
     authParams->len = MM_CH_BUFFER_SIZE_ANALOG_IN;
     authParams->authorizationReply = AUTH_CALLBACK_REPLY_SUCCESS;
   } else if (authParams->handle == analogInP3Ch->getValueHandle()) {
-    mbitMore->updateAnalogIn(analogInP3ChBuffer, 2);
+    mbitMore->updateAnalogIn(analogInP3ChBuffer, 3);
     authParams->data = (uint8_t *)&analogInP3ChBuffer;
     authParams->offset = 0;
     authParams->len = MM_CH_BUFFER_SIZE_ANALOG_IN;

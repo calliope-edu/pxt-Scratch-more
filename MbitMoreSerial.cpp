@@ -265,10 +265,10 @@ void MbitMoreSerial::startSerialReceiving() {
       }
     }
 
-    // ANALOG_IN_P2
+    // ANALOG_IN_P3
     if (0x0123 == ch) {
       if (ChRequest::REQ_READ == requestType) {
-        mbitMore.updateAnalogIn(moreService->analogInP3ChBuffer, 2);
+        mbitMore.updateAnalogIn(moreService->analogInP3ChBuffer, 3);
         readResponseOnSerial(ch, moreService->analogInP3ChBuffer, MM_CH_BUFFER_SIZE_ANALOG_IN);
         frameReceived = 0; // reset frame reading
         continue;
