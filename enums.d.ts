@@ -131,7 +131,7 @@
 
     declare const enum MbitMoreConfig
     {
-    MIC = 0x01,
+    MICPIN = 0x01,
     TOUCH = 0x02,
     }
 
@@ -159,10 +159,10 @@
     P0 = 24,
     P1 = 25,
     P2 = 26,
-    A = 27,
-    B = 28,
-    LOGO = 29,
-    P3 = 30
+    P3 = 27,
+    A = 28,
+    B = 29,
+    LOGO = 30,
     }
 
 
